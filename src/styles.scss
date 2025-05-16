@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Use colors similar to the pink-bluegrey theme
+$primary: mat.define-palette(mat.$green-palette);
+$accent: mat.define-palette(mat.$purple-palette, A200, A100, A400);
+$warn: mat.define-palette(mat.$red-palette);
+
+$custom-theme: mat.define-dark-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  ),
+  typography: mat.define-typography-config(),
+));
+
+@include mat.all-component-themes($custom-theme);
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+}
+
+body {
+    background-color: #141414;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

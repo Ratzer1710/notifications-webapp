@@ -1,0 +1,71 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+  <div class="input-group">
+    <mat-form-field
+      appearance="outline"
+      style="width: 75%"
+      [hideRequiredMarker]="true"
+    >
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" maxlength="100" />
+      <mat-hint>Title is required (max 100 characters).</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="input-group">
+    <mat-form-field
+      appearance="outline"
+      style="width: 75%"
+      [hideRequiredMarker]="true"
+    >
+      <mat-label>Body</mat-label>
+      <textarea matInput formControlName="body" maxlength="250"></textarea>
+      <mat-hint>Body is required (max 250 characters).</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="input-group">
+    <section
+      class="channels-section"
+      style="width: 75%"
+      [class.active]="hasSelectedChannels"
+    >
+      <mat-label>Channels (select at least one):</mat-label>
+      <div *ngFor="let channel of channelOptions">
+        <mat-checkbox
+          [value]="channel"
+          (change)="onCheckboxChange($event)"
+          [checked]="selectedChannels.includes(channel)"
+        >
+          {{ channel }}
+        </mat-checkbox>
+      </div>
+    </section>
+  </div>
+  <div class="input-group datetime-wrapper">
+    <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+      <mat-label>Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="date"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+      <mat-label>Time</mat-label>
+      <input
+        type="text"
+        matInput
+        [ngxMatTimepicker]="timepicker"
+        formControlName="time"
+        readonly
+      />
+      <ngx-mat-timepicker #timepicker></ngx-mat-timepicker>
+    </mat-form-field>
+  </div>
+  <div class="input-group">
+    <button type="submit" class="submit-btn" [disabled]="form.invalid">
+      Send Notification
+    </button>
+  </div>
+</form>

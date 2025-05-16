@@ -1,0 +1,74 @@
+.form {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5%;
+}
+
+.input-group {
+    width: 95%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.channels-section {
+    border: 1px solid #6f6f6f;
+    padding: 2%;
+    border-radius: 5px;
+    &:hover {
+        border-color: #fff;
+    }
+}
+
+.channels-section.active {
+    border: 2px solid #33a752;
+}
+
+.datetime-wrapper {
+  width: 72%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15%;
+  justify-content: space-between;
+}
+
+.datetime-wrapper mat-form-field {
+  width: 100%;
+}
+
+.submit-btn {
+    width: 50%;
+    padding: 2% 0;
+    border: 2px solid #6f6f6f;
+    color: #d8d8d8;
+    border-radius: 5px;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:disabled {
+        color: #6f6f6f
+    }
+
+    &:hover {
+        border-color: #fff;
+        color: #fff;
+    }
+
+    &:disabled:hover {
+        color: #6f6f6f;
+        border-color: #6f6f6f;
+        cursor: default;
+    }
+
+    &:focus {
+        background-color: #33a752;
+    }
+}
