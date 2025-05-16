@@ -29,6 +29,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatButtonModule} from '@angular/material/button';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { NgxMatTimepickerModule } from '@alexfriesen/ngx-mat-timepicker';
+import { invoke } from '@tauri-apps/api/tauri';
 
 @Component({
   selector: 'app-notification-form',
@@ -147,17 +148,18 @@ export class NotificationFormComponent {
     this.notificationsService.sendNotification(notification)
       .subscribe({
         next: () => {
-          this.dialog.open(DialogElementsExampleDialog);
-          this.form = this.fb.group({
-            title: ['', [Validators.required, Validators.maxLength(100)]],
-            body: ['', [Validators.required, Validators.maxLength(250)]],
-            channels: this.fb.array([], this.minSelectedCheckboxes(1)),
-            date: [new Date().toISOString(), Validators.required],
-            time: ['', Validators.required]
+          this.dialog.open(DialogElementsExampleDialog).afterClosed().subscribe(result => {
+            this.close();
           });
         },
         error: err => alert('Error: ' + JSON.stringify(err))
       });
+  }
+
+  close() {
+    invoke('hide_and_reload')
+      .then(() => console.log('Window hidden and reloaded'))
+      .catch(err => console.error('Tauri error:', err));
   }
 }
 
